@@ -1,0 +1,100 @@
+
+</head>
+<body>
+    {% block content %}
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li class="left"><a href="/">Главная</a></li>
+                <div class="right-links">
+                    <li><a href="/profile">Мой профиль</a></li>
+                    <li><a href="info.html">О нас</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="profile">
+            <div class="header-container">
+                <h2>Мой профиль</h2>
+                <div class="dropdown-button">
+                    <i class="fas fa-bars" id="menu-button" style="cursor: pointer; font-size: 24px;"></i>
+                    <div class="dropdown-menu">
+                        <ul>
+                            <li><a href="create_company.html">Создать компанию</a></li>
+                            <li><a href="replenish_balance.html">Пополнить баланс</a></li>
+                            <li><a href="edit_profile.html">Редактировать профиль</a></li>
+                            <li><a href="logout.html">Выйти из аккаунта</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-info">
+                <div class="profile-photo-container">
+                    <img src="upload/{{profile_info.id}}.jpg" alt="Фотография" class="profile-photo">
+                </div>
+                <ul class="user-details">
+                    <li><strong>ID:  </strong>{{profile_info.id}}</li>
+                    <li><strong>Имя:  </strong>{{profile_info.name}}</li>
+                    <li><strong>Пол:  </strong>{{profile_info.sex}}</li>
+                    <li><strong>Возраст:  </strong>{{profile_info.years}}</li>
+                    <li><strong>Город:  </strong>{{profile_info.city}}</li>
+                </ul>
+            </div>
+        
+            <h3>О себе</h3>
+            <p>{{profile_info.about_me}}</p>
+            <h3>Увлечения</h3>
+            <ul>
+                <li>{{profile_info.hobbies}}</li>
+            </ul>
+
+            <div class="container">
+                <h3>Загрузить изображение</h3>
+                <form action="/picture/{{profile_info.id}}" method="post" enctype="multipart/form-data">
+                    <label class="file-upload">
+                        Выберите файл
+                        <input type="file" name="file" accept="image/*" required>
+                    </label>
+                    <input type="submit" value="Загрузить">
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Место встречи</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuButton = document.getElementById('menu-button');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+
+            menuButton.addEventListener('click', function () {
+                // Убираем все классы, чтобы корректно определить позицию
+                dropdownMenu.classList.remove('right');
+
+                // Определяем размеры и положение кнопки
+                const rect = menuButton.getBoundingClientRect();
+                const menuWidth = dropdownMenu.offsetWidth;
+                const windowWidth = window.innerWidth;
+
+
+                dropdownMenu.classList.add('right'); // Меню будет слева
+                // Переключаем видимость меню
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Закрыть меню при клике вне его
+            document.addEventListener('click', function (event) {
+                if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    {% endblock %}
+</body>
+</html>
+

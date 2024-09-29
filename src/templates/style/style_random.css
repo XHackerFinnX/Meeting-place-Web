@@ -1,0 +1,270 @@
+@media (max-width: 600px) {
+    body {
+        background-color: white;
+    }
+    .container {
+        padding: 10px;
+    }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Устанавливаем минимальную высоту на 100% высоты окна */
+}
+
+main {
+    flex: 1; /* Добавлено для растягивания основного контента */
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 0;
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 0 20px;
+
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.nav-links .left {
+    margin-right: auto;
+}
+
+.right-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+.centered {
+    text-align: center;
+    margin-top: 50px; /* Отступ сверху */
+}
+
+.centered h1 {
+    font-size: 36px;
+    color: #4CAF50; /* Цвет заголовка */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Тень для заголовка */
+}
+
+.centered p {
+    font-size: 18px;
+    margin: 20px 0; /* Отступы сверху и снизу */
+}
+
+.button-container {
+    margin-top: 20px;
+    justify-content: center; /* Центрируем кнопки */
+    gap: 20px; /* Промежуток между кнопками */
+    display: flex; /* Используем flexbox */
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Расположение кнопок по вертикали */
+    align-items: center; /* Выравнивание кнопок по центру */
+    gap: 20px; /* Отступ между кнопками */
+}
+
+.company-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    width: 250px; /* Фиксированная ширина кнопок */
+    height: 40px; /* Фиксированная высота кнопок */
+    padding: 15px; /* Убираем горизонтальные отступы */
+    font-size: 16px;
+    border-radius: 5px;
+    flex: 1; /* Каждая кнопка займет равное пространство */
+    min-width: 150px; /* Минимальная ширина кнопок */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.company-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05); /* Немного уменьшаем эффект увеличения */
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #4CAF50;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Футер */
+footer {
+    text-align: center;
+    padding: 2px 0;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.carousel-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel-image {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.carousel-text {
+    font-size: 20px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.arrow {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 24px;
+}
+
+.arrow:hover {
+    background-color: #45a049;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #4CAF50;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.carousel-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px; /* Отступы по бокам */
+}
+
+.carousel-image {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 10px 0;
+    width: 370px;  /* Фиксированная ширина */
+    height: 470px; /* Фиксированная высота */
+    object-fit: cover; /* Сохранение пропорций изображений */
+}
+.h1-random{
+    text-align: center;
+}
+
+.carousel-text {
+    font-size: 20px;
+    text-align: left;
+    margin: 10px 0;
+    max-width: 400px; /* Максимальная ширина, чтобы уместить 40 символов */
+    overflow-wrap: break-word; /* Перенос слов */
+    white-space: normal; /* Позволяет переносить строки */
+}
+
+.arrow {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 8px; /* Увеличенный отступ для кнопок */
+    border-radius: 50%; /* Закругленные кнопки */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 10px;
+    margin: 0 10px; /* Отступы между кнопками и картинкой */
+}
+
+.arrow:hover {
+    background-color: #45a049;
+}
+

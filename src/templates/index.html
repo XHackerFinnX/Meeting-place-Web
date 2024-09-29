@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Место встречи</title>
+    <link rel="stylesheet" href="style/style.css">
+
+    <link href="{{ url_for('style_main', path='/style.css') }}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li class="left"><a href="/">Главная</a></li>
+                <div class="right-links">
+                    <li><a href="/profile">Мой профиль</a></li>
+                    <li><a href="info.html">О нас</a></li>
+                </div>
+            </ul>
+        </nav>       
+    </header>
+
+    <main>
+        <section id="home" class="centered">
+            <h1>Место встречи!</h1>
+            <p>Выберите один из вариантов:</p>
+            <div class="button-container">
+                <button class="company-button" onclick="location.href='company/random.html'">Случайная компания</button>
+                <button class="company-button" onclick="location.href='company/interests.html'">Компания по интересам</button>
+                <button class="company-button" onclick="location.href='company/search.html'">Поиск компании</button>
+            </div>
+        </section>
+    </main>
+    {% endblock %}
+    <footer>
+        <p>&copy; 2024 Место встречи</p>
+    </footer>
+</body>
+</html>

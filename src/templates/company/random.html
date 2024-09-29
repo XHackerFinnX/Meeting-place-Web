@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Случайная компания</title>
+    <link rel="stylesheet" href="../style/style_random.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li class="left"><a href="../index.html">Главная</a></li>
+                <div class="right-links">
+                    <li><a href="../profile.html">Мой профиль</a></li>
+                    <li><a href="../info.html">О нас</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="h1-random">Случайная компания</h1>
+        <div class="carousel">
+            <button class="arrow left-arrow" onclick="prevSlide()">&#9664;</button>
+            <div class="carousel-content">
+                <img src="" alt="Описание изображения" class="carousel-image">
+                <div class="carousel-text">Текст для изображения</div>
+            </div>
+            <button class="arrow right-arrow" onclick="nextSlide()">&#9654;</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Место встречи</p>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = [
+            { img: 'static/photo_company/com_1.jpg', text: 'Погнали тусить в Балканию. Можно 29.04 собраться в Маке' },
+            { img: 'com_3.jpg', text: 'С помощью HTML5FileAPI добавляется в DOM. Используя это, мы можем внутри его прочитать FileList и FileObject. Это дает несколько вариантов использования файлов, их можно загружать локально или отправлять на сервер по сети для обработки, и так далее.' },
+            { img: 'com_2.jpg', text: 'Текст для изображения 3' },
+        ];
+
+        function showSlide(index) {
+            const image = document.querySelector('.carousel-image');
+            const text = document.querySelector('.carousel-text');
+            currentSlide = (index + slides.length) % slides.length; // Для циклического перелистывания
+            image.src = slides[currentSlide].img;
+            text.textContent = slides[currentSlide].text;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Инициализация первого слайда
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
