@@ -60,7 +60,7 @@
                 <li class="left"><a href="/">Главная</a></li>
                 <div class="right-links">
                     <li><a href="/profile">Мой профиль</a></li>
-                    <li><a href="info.html">О нас</a></li>
+                    <li><a href="/info">О нас</a></li>
                 </div>
             </ul>
         </nav>
@@ -76,7 +76,7 @@
                         <ul>
                             <li><a href="create_company.html">Создать компанию</a></li>
                             <li><a href="replenish_balance.html">Пополнить баланс</a></li>
-                            <li><a href="edit_profile.html">Редактировать профиль</a></li>
+                            <li><a href="/edit_profile/{{profile_info.id}}?name={{profile_info.name}}&age={{profile_info.age}}&gender={{profile_info.gender}}&city={{profile_info.city}}&about={{profile_info.about_me}}&hobbies={{profile_info.hobbies}}">Редактировать профиль</a></li>
                             <li><a href="logout.html">Выйти из аккаунта</a></li>
                         </ul>
                     </div>
@@ -84,27 +84,27 @@
             </div>
             <div class="profile-info">
                 <div class="profile-photo-container">
-                    <img src="upload/1.jpg" alt="Фотография" class="profile-photo">
+                    <img src="{{ image_url }}" alt="Фотография" class="profile-photo">
                 </div>
                 <ul class="user-details">
-                    <li><strong>ID:  </strong>1</li>
-                    <li><strong>Имя:  </strong>Лёха</li>
-                    <li><strong>Пол:  </strong>муж.</li>
-                    <li><strong>Возраст:  </strong>22</li>
-                    <li><strong>Город:  </strong>Питер</li>
+                    <li><strong>ID:  </strong>{{profile_info.id}}</li>
+                    <li><strong>Имя:  </strong>{{profile_info.name}}</li>
+                    <li><strong>Пол:  </strong>{{profile_info.gender}}</li>
+                    <li><strong>Возраст:  </strong>{{profile_info.age}}</li>
+                    <li><strong>Город:  </strong>{{profile_info.city}}</li>
                 </ul>
             </div>
         
             <h3>О себе</h3>
-            <p>Я обучаюсь в СПБГУТ им. Бонч-Бруевича на программную-инженерию! Программирую на Python и C++. Проходил различные онлайн курсы, как платные, так и бесплатные. Создаю различные приложения, тг-ботов, сайты и многое другое, что я считаю интересным!</p>
+            <p>{{profile_info.about_me}}</p>
             <h3>Увлечения</h3>
             <ul>
-                <li>Python, git, github</li>
+                <li>{{profile_info.hobbies}}</li>
             </ul>
 
             <div class="container">
                 <h3>Загрузить изображение</h3>
-                <form action="/picture/1" method="post" enctype="multipart/form-data">
+                <form action="/picture/{{profile_info.id}}" method="post" enctype="multipart/form-data">
                     <label class="file-upload">
                         Выберите файл
                         <input type="file" name="file" accept="image/*" required>

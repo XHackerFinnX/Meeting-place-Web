@@ -8,7 +8,7 @@
                 <li class="left"><a href="/">Главная</a></li>
                 <div class="right-links">
                     <li><a href="/profile">Мой профиль</a></li>
-                    <li><a href="info.html">О нас</a></li>
+                    <li><a href="/info">О нас</a></li>
                 </div>
             </ul>
         </nav>
@@ -24,7 +24,7 @@
                         <ul>
                             <li><a href="create_company.html">Создать компанию</a></li>
                             <li><a href="replenish_balance.html">Пополнить баланс</a></li>
-                            <li><a href="edit_profile.html">Редактировать профиль</a></li>
+                            <li><a href="/edit_profile/{{profile_info.id}}?name={{profile_info.name}}&age={{profile_info.age}}&gender={{profile_info.gender}}&city={{profile_info.city}}&about={{profile_info.about_me}}&hobbies={{profile_info.hobbies}}">Редактировать профиль</a></li>
                             <li><a href="logout.html">Выйти из аккаунта</a></li>
                         </ul>
                     </div>
@@ -32,13 +32,13 @@
             </div>
             <div class="profile-info">
                 <div class="profile-photo-container">
-                    <img src="upload/{{profile_info.id}}.jpg" alt="Фотография" class="profile-photo">
+                    <img src="{{ image_url }}" alt="Фотография" class="profile-photo">
                 </div>
                 <ul class="user-details">
                     <li><strong>ID:  </strong>{{profile_info.id}}</li>
                     <li><strong>Имя:  </strong>{{profile_info.name}}</li>
-                    <li><strong>Пол:  </strong>{{profile_info.sex}}</li>
-                    <li><strong>Возраст:  </strong>{{profile_info.years}}</li>
+                    <li><strong>Пол:  </strong>{{profile_info.gender}}</li>
+                    <li><strong>Возраст:  </strong>{{profile_info.age}}</li>
                     <li><strong>Город:  </strong>{{profile_info.city}}</li>
                 </ul>
             </div>

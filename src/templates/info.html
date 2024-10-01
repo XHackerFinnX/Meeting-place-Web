@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О нас</title>
     <link rel="stylesheet" href="style/style_info.css">
+    <link href="{{ url_for('style_info', path='/style_profile.css') }}" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav>
             <ul class="nav-links">
-                <li class="left"><a href="index.html">Главная</a></li>
+                <li class="left"><a href="/">Главная</a></li>
                 <div class="right-links">
-                    <li><a href="profile.html">Мой профиль</a></li>
-                    <li><a href="info.html">О нас</a></li>
+                    <li><a href="/profile">Мой профиль</a></li>
+                    <li><a href="/info">О нас</a></li>
                 </div>
             </ul>
         </nav>

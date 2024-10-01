@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../templates/style/style_authorization.css">
+    <title>Аутентификация</title>
+    <script>
+        async function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            const response = await fetch("http://localhost:8000/token", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({
+                    "username": username,
+                    "password": password
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem("token", data.access_token);
+                alert("Успешно авторизован!");
+            } else {
+                alert("Ошибка аутентификации");
+            }
+        }
+
+        async function getUserInfo() {
+            const token = localStorage.getItem("token");
+            const response = await fetch("http://localhost:8000/users/me", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const user = await response.json();
+                alert(`Пользователь: ${user.username}`);
+            } else {
+                alert("Не удалось получить информацию о пользователе");
+            }
+        }
+
+        function checkSession() {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Вы не авторизованы. Пожалуйста, войдите в систему.");
+            } else {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                const exp = payload.exp * 1000; // перевод в миллисекунды
+                if (Date.now() > exp) {
+                    alert("Сессия истекла. Пожалуйста, войдите снова.");
+                    localStorage.removeItem("token");
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="checkSession()">
+    <header>
+        <h1>Аутентификация</h1>
+    </header>
+    <main>
+        <div class="form-group">
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="username" placeholder="Введите имя пользователя" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" placeholder="Введите пароль" required>
+        </div>
+        <div class="button-container">
+            <button class="save-button" onclick="login()">Войти</button>
+            <button class="save-button" onclick="getUserInfo()">Получить информацию о пользователе</button>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 Место встречи</p>
+    </footer>
+</body>
+</html>

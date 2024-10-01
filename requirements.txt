@@ -4,3 +4,5 @@ sqlalchemy
 aiosqlite
 Jinja2
 python-multipart
+pydantic_settings
+psycopg2
