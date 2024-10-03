@@ -3,9 +3,8 @@ from typing import Annotated, Literal
 from fastapi import APIRouter, Query, Request, UploadFile, File, HTTPException, Depends, Form
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field
-
-import shutil
-import os
+from fastapi.responses import HTMLResponse
+from db.session import DataBaseUsers
 
 router = APIRouter(
     prefix="",
@@ -14,7 +13,6 @@ router = APIRouter(
 
 templates = Jinja2Templates(directory=r"./templates/menu_profile")
 templates_p = Jinja2Templates(directory=r"./templates")
-
 
 class ProfileUsers(BaseModel):
     name: str
@@ -25,8 +23,12 @@ class ProfileUsers(BaseModel):
     hobbies: str
 
 
-@router.get("/edit_profile/{id}")
+@router.get("/edit_profile/{id}", response_class=HTMLResponse)
 async def get_edit_profile_place(id: int, profile: Annotated[ProfileUsers, Query()], request: Request):
+    
+    if 'user' not in request.session:
+        print(HTTPException(status_code=403, detail="Необходима аутентификация"))
+        return templates_p.TemplateResponse(r"authorization.html", {"request": request})
     
     users_profile = {
         "id": id,
@@ -42,9 +44,13 @@ async def get_edit_profile_place(id: int, profile: Annotated[ProfileUsers, Query
                                                              "profile_info": users_profile})
 
 
-@router.post("/profile/{id}")
-async def post_edit_profile_place(id: int, profile: Annotated[ProfileUsers, Form(...)], request: Request):
-    
+@router.post("/save/{id}", response_class=HTMLResponse)
+async def post_edit_profile_place(id: int, request: Request, profile: Annotated[ProfileUsers, Form(...)]):
+
+    if 'user' not in request.session:
+        print(HTTPException(status_code=403, detail="Необходима аутентификация"))
+        return templates_p.TemplateResponse(r"authorization.html", {"request": request})
+
     users_profile = {
         "id": id,
         "name": profile.name,
@@ -55,24 +61,21 @@ async def post_edit_profile_place(id: int, profile: Annotated[ProfileUsers, Form
         "hobbies": profile.hobbies
     }
     
-    url_photo = "static/1.jpg"
+    await DataBaseUsers.user_full_add(DataBaseUsers, int(users_profile['id']), users_profile['name'], int(users_profile['age']), users_profile['gender'], users_profile['city'], users_profile['about_me'], users_profile['hobbies'])
     
+    url_photo = f"static/{id}.jpg"
+
     return templates_p.TemplateResponse(r"profile.html", {"request": request,
                                                         "image_url": url_photo,
                                                         "profile_info": users_profile})
-
-
-@router.get("/style/style_edit_profile.css")
-async def get_style_place(request: Request):
     
-    return True
+@router.get("/save/static/{photo}", response_class=HTMLResponse)
+async def get_static_photo(request: Request, photo: str):
 
-@router.get("/profile/style/style_profile.css")
-async def get_style_place(request: Request):
-    
-    return True
+    if 'user' not in request.session:
+        print(HTTPException(status_code=403, detail="Необходима аутентификация"))
+        return templates_p.TemplateResponse(r"authorization.html", {"request": request})
 
-@router.get("/profile/src/upload/{id}")
-async def get_style_place(id: str):
-    
-    return True
+    url_photo = f"static/{photo}"
+
+    return url_photo
