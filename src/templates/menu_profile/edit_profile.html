@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style/style_edit_profile.css">
     <title>Редактирование профиля</title>
-    <link rel="stylesheet" href="../style/style_edit_profile.css">
-    <link href="{{ url_for('style_edit_profile', path='/style_edit_profile.css') }}" rel="stylesheet"><!DOCTYPE html>
 </head>
 <body>
     <header>
         <h1>Редактирование профиля</h1>
     </header>
     <main>
-        <form action="/profile/{{profile_info.id}}" method="post">
+        <form action="/save/{{profile_info.id}}" method="post">
             <div class="form-group">
                 <label for="name">Имя:</label>
                 <input type="text" id="name" name="name" value="{{profile_info.name}}" required>
@@ -21,9 +20,9 @@
             <div class="form-group">
                 <label for="gender">Пол:</label>
                 <select id="gender" name="gender" required>
-                    <option value="Мужской" selected>Мужской</option>
-                    <option value="Женский">Женский</option>
-                    <option value="Другой">Другой</option>
+                    <option value="Мужской" {% if profile_info.gender == 'Мужской' %}selected{% endif %}>Мужской</option>
+                    <option value="Женский" {% if profile_info.gender == 'Женский' %}selected{% endif %}>Женский</option>
+                    <option value="Другой" {% if profile_info.gender == 'Другой' %}selected{% endif %}>Другой</option>
                 </select>
             </div>
 

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой профиль</title>
-    <link rel="stylesheet" href="style/style_profile.css">
+    <link rel="stylesheet" href="/static/style/style_profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Мой профиль</title>
     <style>
         .container {
             background: white;
@@ -50,7 +50,6 @@
             background: #218838;
         }
     </style>
-    <link href="{{ url_for('style_profile', path='/style_profile.css') }}" rel="stylesheet">
 </head>
 <body>
     
@@ -77,7 +76,7 @@
                             <li><a href="create_company.html">Создать компанию</a></li>
                             <li><a href="replenish_balance.html">Пополнить баланс</a></li>
                             <li><a href="/edit_profile/{{profile_info.id}}?name={{profile_info.name}}&age={{profile_info.age}}&gender={{profile_info.gender}}&city={{profile_info.city}}&about={{profile_info.about_me}}&hobbies={{profile_info.hobbies}}">Редактировать профиль</a></li>
-                            <li><a href="logout.html">Выйти из аккаунта</a></li>
+                            <li><button class="logout-button" id="logout-button">Выйти</button></li>
                         </ul>
                     </div>
                 </div>
@@ -104,7 +103,7 @@
 
             <div class="container">
                 <h3>Загрузить изображение</h3>
-                <form action="/picture/{{profile_info.id}}" method="post" enctype="multipart/form-data">
+                <form action="/photo/{{profile_info.id}}" method="post" enctype="multipart/form-data">
                     <label class="file-upload">
                         Выберите файл
                         <input type="file" name="file" accept="image/*" required>
@@ -144,6 +143,24 @@
                     dropdownMenu.style.display = 'none';
                 }
             });
+        });
+
+         // Удаление куки сессии
+         document.getElementById('logout-button').addEventListener('click', async () => {
+            // Удаление куки
+            document.cookie = "session=; Max-Age=0; path=/;";
+            const response = await fetch('/exit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (response.ok) {
+                window.location.href = '/auth'; // Переход на главную страницу
+            } else {
+                alert('Ошибка удаления куки');
+            }
         });
     </script>
     
