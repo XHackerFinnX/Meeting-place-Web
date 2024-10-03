@@ -6,3 +6,11 @@ Jinja2
 python-multipart
 pydantic_settings
 psycopg2
+jose
+passlib
+fastapi-users
+asyncpg
+fastapi-users[sqlalchemy]
+python-jose[cryptography]
+passlib[bcrypt]
+itsdangerous
