@@ -7,6 +7,19 @@
     }
 }
 
+@media (max-width: 600px) {
+    .form-group {
+        padding: 5px; /* Уменьшены отступы на мобильных */
+    }
+    .save-button {
+        padding: 10px; /* Уменьшение кнопки на мобильных */
+    }
+    
+    main {
+        padding: 15px; /* Уменьшение отступов */
+    }
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
