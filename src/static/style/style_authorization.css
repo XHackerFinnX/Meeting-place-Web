@@ -71,6 +71,7 @@ header {
 .button-container {
     display: flex; /* Используем flexbox */
     justify-content: center; /* Центрируем кнопку */
+    margin-top: 10px;
 }
 
 /* Кнопки */
