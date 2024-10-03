@@ -4,7 +4,7 @@ from fastapi import APIRouter, Query, Request, UploadFile, File, HTTPException, 
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field
 from fastapi.responses import HTMLResponse
-from db.session import DataBaseUsers
+from db.session import DataBaseUsers, UserPay
 
 router = APIRouter(
     prefix="",
@@ -60,6 +60,10 @@ async def post_edit_profile_place(id: int, request: Request, profile: Annotated[
         "about_me": profile.about,
         "hobbies": profile.hobbies
     }
+    
+    balance_user = await UserPay.user_balance(UserPay, int(request.session['user']))
+
+    users_profile.update(balance_user)
     
     await DataBaseUsers.user_full_add(DataBaseUsers, int(users_profile['id']), users_profile['name'], int(users_profile['age']), users_profile['gender'], users_profile['city'], users_profile['about_me'], users_profile['hobbies'])
     

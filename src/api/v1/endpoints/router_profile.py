@@ -4,7 +4,7 @@ from fastapi import APIRouter, Request, UploadFile, File, HTTPException, Depends
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field
 from fastapi.responses import HTMLResponse
-from db.session import DataBaseUsers
+from db.session import DataBaseUsers, UserPay
 
 import shutil
 import os
@@ -37,6 +37,9 @@ async def get_profile_place(request: Request):
         return templates.TemplateResponse(r"authorization.html", {"request": request})
     
     profile_user = await DataBaseUsers.user_data(DataBaseUsers, int(request.session['user']))
+    balance_user = await UserPay.user_balance(UserPay, int(request.session['user']))
+
+    profile_user.update(balance_user)
     
     url_photo = f"static/{profile_user['id']}.jpg"
     
