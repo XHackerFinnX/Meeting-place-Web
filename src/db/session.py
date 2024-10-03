@@ -27,7 +27,12 @@ class DataBaseUsers():
                     connect.commit()
                     check_users = cursor.fetchall()
                     
-                    if check_users:
+                    check_users_pay = f"SELECT balance FROM public.place_users_balance WHERE login_id = {login_id};"
+                    cursor.execute(check_users_pay)
+                    connect.commit()
+                    check_users_pay = cursor.fetchall()
+                    
+                    if check_users and check_users_pay:
                         return False
                     else:
                         return True
@@ -49,6 +54,19 @@ class DataBaseUsers():
             
         except (InterfaceError, Error) as error:
             print(error, "Ошибка добавления логина пользователя!", login_id)
+            
+        try:
+            with self.connection as connect:
+                with connect.cursor() as cursor:
+                    
+                    add_users_balance = f"INSERT INTO public.place_users_balance (login_id, balance) VALUES ({login_id}, {0});"
+                    cursor.execute(add_users_balance)
+                    connect.commit()
+            
+            return True
+            
+        except (InterfaceError, Error) as error:
+            print(error, "Ошибка добавления баланса пользователя!", login_id)
     
     async def user_full_add(self, login_id: int, name: str, age: int, gender: str, city: str, about: str, hobbies: str):
         
@@ -144,3 +162,35 @@ class UserAuth():
         except (InterfaceError, Error) as error:
             print(error, "Ошибка проверки пользователя в БД!", login_id)
             
+
+class UserPay():
+            
+    connection = psycopg2.connect(
+        host=config.POSTGRESQL_HOST.get_secret_value(),
+        database=config.POSTGRESQL_DATABASE.get_secret_value(),
+        user=config.POSTGRESQL_USER.get_secret_value(),
+        password=config.POSTGRESQL_PASSWORD.get_secret_value(),
+        port = config.POSTGRESQL_PORT.get_secret_value()
+    )
+    
+    cursor = connection.cursor()
+    
+    async def user_balance(self, login_id: int):
+        
+        try:
+            with self.connection as connect:
+                with connect.cursor() as cursor:
+                    
+                    user_pay = f"SELECT balance FROM public.place_users_balance WHERE login_id = {login_id};"
+                    cursor.execute(user_pay)
+                    connect.commit()
+                    user_pay = cursor.fetchall()[0][0]
+                    
+                    user = {
+                        "balance": user_pay
+                    }
+                    
+            return user
+            
+        except (InterfaceError, Error) as error:
+            print(error, "Ошибка проверки баланса пользователя в БД!", login_id)
